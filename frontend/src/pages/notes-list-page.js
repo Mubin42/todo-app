@@ -1,5 +1,7 @@
 import React, { useState, useEffect} from 'react';
-import ListItem from '../components/list-item'
+import ListItem from '../components/list-item';
+
+
 const NotesListPage = () => {
   let [notes, setNotes] = useState([]);
 
@@ -8,7 +10,7 @@ const NotesListPage = () => {
   }, [])
 
   let getNotes = async () => {
-    let response = await fetch('http://127.0.0.1:8000/api/notes/');
+    let response = await fetch('/api/notes/');
     let data = await response.json();
     setNotes(data);
   }
