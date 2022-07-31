@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+
+import api
 from .models import Note
 from .serializers import NoteSerializer
+from api import serializers
 # Create your views here.
 
 
@@ -72,6 +75,16 @@ def deleteNote(request, pk):
     note = Note.objects.get(id=pk)
     note.delete()
     return Response('Note was Deleted')
+
+
+@api_view(['POST'])
+def createNote(request):
+    data = request.data
+    note = Note.objects.create(
+        body = data['body']
+    )
+    serializer = NoteSerializer(note, many=False)
+    return Response(serializer.data)
 
 
     
