@@ -44,20 +44,25 @@ const NotePage = ({ match }) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
-      }
-    })
+      }})
     navigate('/')
   }
 
   let handleSubmit = () => {
     if(id !== 'new' && !note.body){
       deleteNote()
-    }else if(id !== 'new'){
+    }
+    else if(id !== 'new'){
       updateNote()
-    }else if(id === 'new' && note !== null){
+    }
+    else if(id === 'new' && note !== null){
       createNote()
     }
     navigate('/')
+  }
+
+  let handleChange = (value) => {
+    setNote({...note,'body': value})
   }
 
   return (
@@ -72,7 +77,7 @@ const NotePage = ({ match }) => {
           <button onClick={handleSubmit}>Done</button>
         )}
       </div>
-      <textarea onChange={(e) => {setNote({...note,'body': e.target.value})}} defaultValue={note?.body}></textarea>
+      <textarea onChange={(e) => {handleChange(e.target.value)}} defaultValue={note?.body}></textarea>
     </div>
   )
 }
